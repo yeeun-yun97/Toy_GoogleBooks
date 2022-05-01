@@ -1,6 +1,5 @@
 package com.github.yeeun_yun97.clone.googlebook.ui
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -11,10 +10,10 @@ import com.github.yeeun_yun97.clone.googlebook.databinding.ItemBookBinding
 
 class BookAdapter(
     var itemList: List<BookData>,
-    val openOperation: (String) -> Unit
+    private val openOperation: (String) -> Unit
 ) : RecyclerView.Adapter<BookViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
-        val binding = ItemBookBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = ItemBookBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return BookViewHolder(binding);
     }
 
@@ -25,7 +24,7 @@ class BookAdapter(
     override fun getItemCount(): Int = itemList.size
 }
 
-class BookViewHolder(val binding: ItemBookBinding) : RecyclerView.ViewHolder(binding.root) {
+class BookViewHolder(private val binding: ItemBookBinding) : RecyclerView.ViewHolder(binding.root) {
     fun setItem(
         bookData: BookData,
         openOperation: (String) -> Unit
@@ -40,10 +39,6 @@ class BookViewHolder(val binding: ItemBookBinding) : RecyclerView.ViewHolder(bin
         binding.openLinkImageView.setOnClickListener {
             openOperation(bookData.linkUrl)
         }
-    }
-
-    fun openLink(url: String) {
-        Log.d("tag", url)
     }
 
 }

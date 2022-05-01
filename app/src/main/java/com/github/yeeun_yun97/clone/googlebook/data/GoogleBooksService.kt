@@ -1,7 +1,6 @@
 package com.github.yeeun_yun97.clone.googlebook.data
 
 import com.github.yeeun_yun97.clone.googlebook.data.model.SearchBooks
-import retrofit2.Call
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

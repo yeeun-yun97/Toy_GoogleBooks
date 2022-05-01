@@ -11,13 +11,13 @@ import com.github.yeeun_yun97.clone.googlebook.R
 import com.github.yeeun_yun97.clone.googlebook.viewModel.ListBookViewModel.ListBookViewModel
 
 class MainActivity : AppCompatActivity() {
-    val viewModel: ListBookViewModel by viewModels()
+    private val viewModel: ListBookViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val adapter = BookAdapter(viewModel.bookList.value!!,::open)
+        val adapter = BookAdapter(viewModel.bookList.value!!, ::open)
         val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -28,9 +28,10 @@ class MainActivity : AppCompatActivity() {
                 adapter.notifyDataSetChanged()
             }
         )
+        viewModel.loadBooks()
     }
 
-    fun open(url: String) {
+    private fun open(url: String) {
         if (!url.isNullOrEmpty()) {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
