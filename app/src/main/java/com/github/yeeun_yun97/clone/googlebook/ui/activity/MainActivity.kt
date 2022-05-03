@@ -1,4 +1,4 @@
-package com.github.yeeun_yun97.clone.googlebook.ui
+package com.github.yeeun_yun97.clone.googlebook.ui.activity
 
 import android.content.Intent
 import android.net.Uri
@@ -8,7 +8,8 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.github.yeeun_yun97.clone.googlebook.R
-import com.github.yeeun_yun97.clone.googlebook.viewModel.ListBookViewModel.ListBookViewModel
+import com.github.yeeun_yun97.clone.googlebook.ui.BookAdapter
+import com.github.yeeun_yun97.clone.googlebook.viewModel.ListBookViewModel
 
 class MainActivity : AppCompatActivity() {
     private val viewModel: ListBookViewModel by viewModels()

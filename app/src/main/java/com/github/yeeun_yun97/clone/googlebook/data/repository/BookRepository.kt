@@ -1,10 +1,21 @@
-package com.github.yeeun_yun97.clone.googlebook.data
+package com.github.yeeun_yun97.clone.googlebook.data.repository
 
 import android.util.Log
+import com.github.yeeun_yun97.clone.googlebook.data.retrofit.GoogleBooksService
 import com.github.yeeun_yun97.clone.googlebook.data.model.BookData
 
-class BookRepository {
-    val service = GoogleBooksService.newInstance()
+class BookRepository private constructor() {
+    private val service = GoogleBooksService.newInstance()
+
+    companion object {
+        private lateinit var repo: BookRepository
+        fun newInstance(): BookRepository {
+            if (!this::repo.isInitialized) {
+                repo = BookRepository()
+            }
+            return repo
+        }
+    }
 
     suspend fun getBooks(): List<BookData> {
         val list = mutableListOf<BookData>()
@@ -20,10 +31,10 @@ class BookRepository {
                     } else {
                         book.volumeInfo.authors[0]
                     }
-                val imageUrl :String =
-                    if(book.volumeInfo.imageLinks==null|| book.volumeInfo.imageLinks.values.size==0){
+                val imageUrl: String =
+                    if (book.volumeInfo.imageLinks == null || book.volumeInfo.imageLinks.values.size == 0) {
                         ""
-                    }else{
+                    } else {
                         book.volumeInfo.imageLinks.values.random()
                     }
                 val bookData = BookData(
@@ -38,7 +49,7 @@ class BookRepository {
             }
             return list
         }
-        return listOf<BookData>()
+        return listOf()
     }
 
 }

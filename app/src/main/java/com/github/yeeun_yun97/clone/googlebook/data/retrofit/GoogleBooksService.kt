@@ -1,4 +1,4 @@
-package com.github.yeeun_yun97.clone.googlebook.data
+package com.github.yeeun_yun97.clone.googlebook.data.retrofit
 
 import com.github.yeeun_yun97.clone.googlebook.data.model.SearchBooks
 import retrofit2.Response
