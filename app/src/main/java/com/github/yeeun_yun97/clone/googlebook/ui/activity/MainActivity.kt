@@ -1,43 +1,18 @@
 package com.github.yeeun_yun97.clone.googlebook.ui.activity
 
-import android.content.Intent
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.github.yeeun_yun97.clone.googlebook.R
-import com.github.yeeun_yun97.clone.googlebook.ui.BookAdapter
-import com.github.yeeun_yun97.clone.googlebook.viewModel.ListBookViewModel
+import android.view.LayoutInflater
+import androidx.fragment.app.Fragment
+import com.github.yeeun_yun97.clone.googlebook.databinding.ActivityMainBinding
+import com.github.yeeun_yun97.clone.googlebook.ui.activity.basic.BasicActivity
+import com.github.yeeun_yun97.clone.googlebook.ui.fragment.ListBookFragment
 
-class MainActivity : AppCompatActivity() {
-    private val viewModel: ListBookViewModel by viewModels()
+class MainActivity : BasicActivity<ActivityMainBinding>() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    override fun homeFragment(): Fragment = ListBookFragment()
 
-        val adapter = BookAdapter(viewModel.bookList.value!!, ::open)
-        val recyclerView = findViewById<RecyclerView>(R.id.recyclerView)
+    override fun viewBindingInflate(inflater: LayoutInflater): ActivityMainBinding =
+        ActivityMainBinding.inflate(inflater)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
-        viewModel.bookList.observe(
-            this, {
-                adapter.itemList = it
-                adapter.notifyDataSetChanged()
-            }
-        )
-        viewModel.loadBooks()
-    }
-
-    private fun open(url: String) {
-        if (!url.isNullOrEmpty()) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
-        }
-    }
-
+    override fun onCreate() {}
 
 }
