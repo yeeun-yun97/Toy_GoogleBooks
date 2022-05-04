@@ -6,18 +6,14 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class BookData(
-    @PrimaryKey(autoGenerate = true)
-    val id: Long = 0L,
-    @ColumnInfo(name = "author")
-    val author: String,
-    @ColumnInfo(name = "publisher")
-    val publisher: String,
-    @ColumnInfo(name = "title")
-    val title: String,
-    @ColumnInfo(name = "linkUrl")
-    val linkUrl: String,
-    @ColumnInfo(name = "publishedDate")
-    val publishedDate: String,
-    @ColumnInfo(name = "imageUrl")
-    val imageUrl: String
-)
+    @PrimaryKey(autoGenerate = true) val id: Long = 0L,
+    @ColumnInfo(name = "author") val author: String,
+    @ColumnInfo(name = "code") val code: String,
+    @ColumnInfo(name = "publisher") val publisher: String,
+    @ColumnInfo(name = "title") val title: String,
+    @ColumnInfo(name = "linkUrl") val linkUrl: String,
+    @ColumnInfo(name = "publishedDate") val publishedDate: String,
+    @ColumnInfo(name = "imageUrl") val imageUrl: String,
+    @ColumnInfo(name = "saved") var saved: Boolean,
+
+    )

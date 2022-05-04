@@ -23,4 +23,16 @@ class RoomRepository {
         dao.deleteFav(fav)
     }
 
+    fun insertFav(fav: BookData) {
+        fav.saved = true
+        dao.insertFav(fav)
+    }
+
+    fun checkIfBookExists(code: String): Boolean {
+        if (dao.readFavByCode(code) != null) {
+            return true
+        }
+        return false
+    }
+
 }

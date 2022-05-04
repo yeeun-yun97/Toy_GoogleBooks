@@ -39,11 +39,13 @@ class BookRepository private constructor() {
                     }
                 val bookData = BookData(
                     author = author,
+                    code = book.id,
                     publisher = book.volumeInfo.publisher ?: "",
                     title = book.volumeInfo.title ?: "",
                     linkUrl = book.volumeInfo.infoLink ?: "",
                     publishedDate = book.volumeInfo.publishedDate ?: "",
-                    imageUrl = imageUrl
+                    imageUrl = imageUrl,
+                    saved = false
                 )
                 list.add(bookData)
             }

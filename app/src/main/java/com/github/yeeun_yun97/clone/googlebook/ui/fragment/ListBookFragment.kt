@@ -5,19 +5,20 @@ import android.net.Uri
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.yeeun_yun97.clone.googlebook.R
+import com.github.yeeun_yun97.clone.googlebook.data.model.BookData
 import com.github.yeeun_yun97.clone.googlebook.databinding.FragmentListBookBinding
 import com.github.yeeun_yun97.clone.googlebook.ui.adapter.BookAdapter
-import com.github.yeeun_yun97.clone.googlebook.viewModel.ListBookViewModel
+import com.github.yeeun_yun97.clone.googlebook.viewModel.BookViewModel
 
 class ListBookFragment : BasicFragment<FragmentListBookBinding>() {
-    private val viewModel: ListBookViewModel by activityViewModels()
+    private val viewModel: BookViewModel by activityViewModels()
 
     override fun layoutId(): Int = R.layout.fragment_list_book
 
     override fun onCreateView() {
         val recyclerView = binding.recyclerView
 
-        val adapter = BookAdapter(::open)
+        val adapter = BookAdapter(::open, ::saveFav, false)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
         viewModel.bookList.observe(
@@ -33,6 +34,10 @@ class ListBookFragment : BasicFragment<FragmentListBookBinding>() {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
             startActivity(intent)
         }
+    }
+
+    private fun saveFav(fav: BookData, isAdd: Boolean) {
+        viewModel.saveFav(fav, isAdd)
     }
 
 }
