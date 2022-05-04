@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools"
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
@@ -12,6 +12,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="15dp">
+
+        <ImageView
+            android:id="@+id/favoriteImageView"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:layout_constraintBottom_toBottomOf="@+id/openLinkImageView"
+            app:layout_constraintEnd_toStartOf="@+id/openLinkImageView"
+            app:layout_constraintTop_toTopOf="@+id/openLinkImageView"
+            app:srcCompat="@drawable/ic_baseline_star_outline_24" />
 
         <TextView
             android:id="@+id/authorTextView"
@@ -37,10 +46,10 @@
             android:id="@+id/openLinkImageView"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:padding="1dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.606"
             app:srcCompat="@drawable/ic_baseline_open_in_browser_24" />
 
         <TextView
@@ -54,7 +63,7 @@
             android:textSize="17sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/authorTextView"
-            app:layout_constraintEnd_toStartOf="@+id/openLinkImageView"
+            app:layout_constraintEnd_toStartOf="@+id/favoriteImageView"
             app:layout_constraintStart_toEndOf="@+id/bookImageView"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="spread" />

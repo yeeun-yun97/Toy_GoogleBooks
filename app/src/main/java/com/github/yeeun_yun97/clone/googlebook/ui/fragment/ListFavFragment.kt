@@ -5,27 +5,25 @@ import android.net.Uri
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.yeeun_yun97.clone.googlebook.R
-import com.github.yeeun_yun97.clone.googlebook.databinding.FragmentListBookBinding
+import com.github.yeeun_yun97.clone.googlebook.databinding.FragmentListFavBinding
 import com.github.yeeun_yun97.clone.googlebook.ui.adapter.BookAdapter
-import com.github.yeeun_yun97.clone.googlebook.viewModel.ListBookViewModel
+import com.github.yeeun_yun97.clone.googlebook.viewModel.ListFavViewModel
 
-class ListBookFragment : BasicFragment<FragmentListBookBinding>() {
-    private val viewModel: ListBookViewModel by activityViewModels()
+class ListFavFragment : BasicFragment<FragmentListFavBinding>() {
+    private val viewModel: ListFavViewModel by activityViewModels()
 
-    override fun layoutId(): Int = R.layout.fragment_list_book
+    override fun layoutId(): Int = R.layout.fragment_list_fav
 
     override fun onCreateView() {
-        val recyclerView = binding.recyclerView
-
         val adapter = BookAdapter(::open)
-        recyclerView.layoutManager = LinearLayoutManager(context)
-        recyclerView.adapter = adapter
-        viewModel.bookList.observe(
-            viewLifecycleOwner, {
+        binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerView.adapter = adapter
+        viewModel.favList.observe(
+            viewLifecycleOwner,
+            {
                 adapter.setList(it)
             }
         )
-        viewModel.loadBooks()
     }
 
     private fun open(url: String) {
@@ -34,5 +32,4 @@ class ListBookFragment : BasicFragment<FragmentListBookBinding>() {
             startActivity(intent)
         }
     }
-
 }
