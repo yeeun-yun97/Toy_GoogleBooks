@@ -18,8 +18,6 @@ class ListFavFragment : BasicFragment<FragmentListFavBinding>() {
     override fun onCreateView() {
         val adapter = BookAdapter(::open, ::saveFav, true)
 
-        binding.include.toolbar.setTitle("즐겨찾기 목록")
-
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
         viewModel.favList.observe(
