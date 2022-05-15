@@ -42,7 +42,7 @@ class BookRepository private constructor() {
                     code = book.id,
                     publisher = book.volumeInfo.publisher ?: "",
                     title = book.volumeInfo.title ?: "",
-                    linkUrl = book.volumeInfo.infoLink ?: "",
+                    linkUrl = book.volumeInfo.canonicalVolumeLink ?: "",
                     publishedDate = book.volumeInfo.publishedDate ?: "",
                     imageUrl = imageUrl,
                     saved = false

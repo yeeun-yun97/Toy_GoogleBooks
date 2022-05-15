@@ -33,8 +33,10 @@ class ListBookFragment : BasicFragment<FragmentListBookBinding>() {
 
     private fun open(url: String) {
         if (url.isNotEmpty()) {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-            startActivity(intent)
+//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+//            startActivity(intent)
+
+            moveToOtherFragment(ViewWebFragment.newInstance(url))
         }
     }
 

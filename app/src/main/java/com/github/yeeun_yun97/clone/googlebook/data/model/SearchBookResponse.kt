@@ -28,6 +28,8 @@ data class VolumeInfo(
     val publishedDate: String?,
     val imageLinks: Map<String, String>?,
     val infoLink: String?,
+    val previewLink: String,
+    val canonicalVolumeLink: String
     /*
     val industryIdentifiers: List<Map<String, String>>,
     val description: String,
@@ -39,7 +41,7 @@ data class VolumeInfo(
     val contentVersion: String,
     val panelizationSummary: Map<String, String>,
     val language: String,
-    val previewLink: String,
-    val canonicalVolumeLnk: String
+
+
     */
 )
