@@ -13,7 +13,7 @@ import com.github.yeeun_yun97.clone.ynmodule.ui.adapter.RecyclerBasicViewHolder
 class BookAdapter(
     private val openOperation: (String) -> Unit,
     private val favOperation: (BookData, Boolean) -> Unit,
-    private val isFav: Boolean
+    private val viewOperation: (BookData) -> Unit
 ) : RecyclerBasicAdapter<BookData, BookViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder {
         val binding = ItemBookBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -21,7 +21,7 @@ class BookAdapter(
     }
 
     override fun onBindViewHolder(holder: BookViewHolder, item: BookData) {
-        holder.setItem(item, openOperation, favOperation)
+        holder.setItem(item, openOperation, favOperation, viewOperation)
     }
 }
 
@@ -30,9 +30,13 @@ class BookViewHolder(binding: ItemBookBinding) :
     fun setItem(
         bookData: BookData,
         openOperation: (String) -> Unit,
-        favOperation: (BookData, Boolean) -> Unit
+        favOperation: (BookData, Boolean) -> Unit,
+        viewOperation: (BookData) -> Unit
     ) {
         binding.bookData = bookData
+        binding.root.setOnClickListener {
+            viewOperation(bookData)
+        }
         if (bookData.imageUrl != "") {
             Glide.with(itemView)
                 .load(bookData.imageUrl)

@@ -12,8 +12,8 @@ data class BookData(
     @ColumnInfo(name = "publisher") val publisher: String,
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "linkUrl") val linkUrl: String,
+    @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "publishedDate") val publishedDate: String,
     @ColumnInfo(name = "imageUrl") val imageUrl: String,
     @ColumnInfo(name = "saved") var saved: Boolean,
-
     )

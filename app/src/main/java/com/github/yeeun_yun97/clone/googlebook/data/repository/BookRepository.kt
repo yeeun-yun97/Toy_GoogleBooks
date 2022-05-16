@@ -29,7 +29,12 @@ class BookRepository private constructor() {
                     if (book.volumeInfo.authors == null || book.volumeInfo.authors.size == 0) {
                         ""
                     } else {
-                        book.volumeInfo.authors[0]
+                        val builder = StringBuilder()
+                        for(aut in book.volumeInfo.authors){
+                            builder.append("$aut, ")
+                        }
+                        builder.setLength(builder.length-2)
+                        builder.toString()
                     }
                 val imageUrl: String =
                     if (book.volumeInfo.imageLinks == null || book.volumeInfo.imageLinks.values.size == 0) {
@@ -45,7 +50,8 @@ class BookRepository private constructor() {
                     linkUrl = book.volumeInfo.canonicalVolumeLink ?: "",
                     publishedDate = book.volumeInfo.publishedDate ?: "",
                     imageUrl = imageUrl,
-                    saved = false
+                    saved = false,
+                    description = book.volumeInfo.description ?: ""
                 )
                 list.add(bookData)
             }

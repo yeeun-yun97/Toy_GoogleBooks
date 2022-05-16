@@ -28,11 +28,12 @@ data class VolumeInfo(
     val publishedDate: String?,
     val imageLinks: Map<String, String>?,
     val infoLink: String?,
-    val previewLink: String,
-    val canonicalVolumeLink: String
+    val description: String?,
+    val previewLink: String?,
+    val canonicalVolumeLink: String?
     /*
     val industryIdentifiers: List<Map<String, String>>,
-    val description: String,
+
     val readingModes: Map<String, String>,
     val printType: String,
     val categories: List<String>,

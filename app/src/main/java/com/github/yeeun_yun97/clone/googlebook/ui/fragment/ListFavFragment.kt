@@ -9,14 +9,16 @@ import com.github.yeeun_yun97.clone.googlebook.data.model.BookData
 import com.github.yeeun_yun97.clone.googlebook.databinding.FragmentListFavBinding
 import com.github.yeeun_yun97.clone.googlebook.ui.adapter.BookAdapter
 import com.github.yeeun_yun97.clone.googlebook.viewModel.BookViewModel
+import com.github.yeeun_yun97.clone.googlebook.viewModel.SingleBookViewModel
 
 class ListFavFragment : BasicFragment<FragmentListFavBinding>() {
     private val viewModel: BookViewModel by activityViewModels()
+    private val singleBookViewModel: SingleBookViewModel by activityViewModels()
 
     override fun layoutId(): Int = R.layout.fragment_list_fav
 
     override fun onCreateView() {
-        val adapter = BookAdapter(::open, ::saveFav, true)
+        val adapter = BookAdapter(::open, ::saveFav, ::moveToViewBookFragment)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
@@ -34,6 +36,11 @@ class ListFavFragment : BasicFragment<FragmentListFavBinding>() {
 //            startActivity(intent)
             moveToOtherFragment(ViewWebFragment.newInstance(url))
         }
+    }
+
+    private fun moveToViewBookFragment(book: BookData) {
+        singleBookViewModel.book.postValue(book)
+        moveToOtherFragment(ViewBookDataFragment())
     }
 
     private fun saveFav(fav: BookData, isAdd: Boolean) {

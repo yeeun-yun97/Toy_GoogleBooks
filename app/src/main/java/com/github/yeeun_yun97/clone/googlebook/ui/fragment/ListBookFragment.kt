@@ -9,9 +9,11 @@ import com.github.yeeun_yun97.clone.googlebook.data.model.BookData
 import com.github.yeeun_yun97.clone.googlebook.databinding.FragmentListBookBinding
 import com.github.yeeun_yun97.clone.googlebook.ui.adapter.BookAdapter
 import com.github.yeeun_yun97.clone.googlebook.viewModel.BookViewModel
+import com.github.yeeun_yun97.clone.googlebook.viewModel.SingleBookViewModel
 
 class ListBookFragment : BasicFragment<FragmentListBookBinding>() {
     private val viewModel: BookViewModel by activityViewModels()
+    private val singleBookViewModel: SingleBookViewModel by activityViewModels()
 
     override fun layoutId(): Int = R.layout.fragment_list_book
 
@@ -20,7 +22,7 @@ class ListBookFragment : BasicFragment<FragmentListBookBinding>() {
 
         binding.include.toolbarTitle="책 목록 - '프로그래밍'"
 
-        val adapter = BookAdapter(::open, ::saveFav, false)
+        val adapter = BookAdapter(::open, ::saveFav, ::moveToViewBookFragment)
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = adapter
         viewModel.bookList.observe(
@@ -35,9 +37,13 @@ class ListBookFragment : BasicFragment<FragmentListBookBinding>() {
         if (url.isNotEmpty()) {
 //            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
 //            startActivity(intent)
-
             moveToOtherFragment(ViewWebFragment.newInstance(url))
         }
+    }
+
+    private fun moveToViewBookFragment(book: BookData) {
+        singleBookViewModel.book.postValue(book)
+        moveToOtherFragment(ViewBookDataFragment())
     }
 
     private fun saveFav(fav: BookData, isAdd: Boolean) {
