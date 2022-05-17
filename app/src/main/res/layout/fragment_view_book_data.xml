@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
@@ -20,91 +21,111 @@
             app:layout_constraintTop_toTopOf="parent"
             app:toolbarTitle="책 정보" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="100dp"
-            android:layout_height="125dp"
-            android:padding="5dp"
-            app:layout_constraintStart_toStartOf="@id/bookNameTextView"
-            app:layout_constraintTop_toBottomOf="@id/bookNameTextView"
-            app:srcCompat="@drawable/ic_baseline_menu_book_24" />
-
-        <TextView
-            android:id="@+id/bookNameTextView"
-            style="@style/title2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="15dp"
-            android:paddingVertical="10dp"
-            android:text="@{viewModel.book.title, default = 제목}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-        <TextView
-            android:id="@+id/authorTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.book.author, default = 작가}"
-            app:layout_constraintBottom_toTopOf="@id/publishedDateTextView"
-            app:layout_constraintEnd_toEndOf="@+id/bookNameTextView"
-            app:layout_constraintHorizontal_bias="0.367"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="@+id/imageView" />
-
-        <TextView
-            android:id="@+id/publishedDateTextView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@{viewModel.book.publishedDate, default = 날짜}"
-            app:layout_constraintBottom_toTopOf="@id/openWebButton"
-            app:layout_constraintEnd_toEndOf="@+id/authorTextView"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/authorTextView" />
-
-        <View
-            android:id="@+id/view"
-            android:layout_width="0dp"
-            android:layout_height="0.5dp"
-            android:background="@color/_gray"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
-
-        <TextView
-            android:id="@+id/detailTextView"
+        <ScrollView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginVertical="10dp"
-            android:text="@{viewModel.book.description, default = 설명}"
+            android:fillViewport="true"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/favoriteImageView"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/view"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            tools:layout_constraintStart_toStartOf="parent"
+            tools:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/openWebButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="정보 페이지 열기"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView"
-            app:layout_constraintEnd_toStartOf="@+id/favoriteImageView"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toBottomOf="@+id/publishedDateTextView" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/favoriteImageView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/openWebButton"
-            app:layout_constraintEnd_toEndOf="@+id/publishedDateTextView"
-            app:layout_constraintStart_toEndOf="@id/openWebButton"
-            app:layout_constraintTop_toTopOf="@+id/openWebButton"
-            app:srcCompat="@drawable/ic_baseline_star_24" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="100dp"
+                    android:layout_height="125dp"
+                    android:padding="5dp"
+                    app:layout_constraintStart_toStartOf="@id/bookNameTextView"
+                    app:layout_constraintTop_toBottomOf="@id/bookNameTextView"
+                    app:srcCompat="@drawable/ic_baseline_menu_book_24" />
+
+                <TextView
+                    android:id="@+id/bookNameTextView"
+                    style="@style/title2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:paddingVertical="10dp"
+                    android:text="@{viewModel.book.title, default = 제목}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/authorTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.book.author, default = 작가}"
+                    app:layout_constraintBottom_toTopOf="@id/publishedDateTextView"
+                    app:layout_constraintEnd_toEndOf="@+id/bookNameTextView"
+                    app:layout_constraintHorizontal_bias="0.367"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toTopOf="@+id/imageView" />
+
+                <TextView
+                    android:id="@+id/publishedDateTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.book.publishedDate, default = 날짜}"
+                    app:layout_constraintBottom_toTopOf="@id/openWebButton"
+                    app:layout_constraintEnd_toEndOf="@+id/authorTextView"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/authorTextView" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="0dp"
+                    android:layout_height="0.5dp"
+                    android:background="@color/_gray"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView" />
+
+                <TextView
+                    android:id="@+id/detailTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="10dp"
+                    android:text="@{viewModel.book.description, default = 설명}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="@+id/favoriteImageView"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/view"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <Button
+                    android:id="@+id/openWebButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="정보 페이지 열기"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageView"
+                    app:layout_constraintEnd_toStartOf="@+id/favoriteImageView"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toEndOf="@+id/imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/publishedDateTextView" />
+
+                <ImageView
+                    android:id="@+id/favoriteImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/openWebButton"
+                    app:layout_constraintEnd_toEndOf="@+id/publishedDateTextView"
+                    app:layout_constraintStart_toEndOf="@id/openWebButton"
+                    app:layout_constraintTop_toTopOf="@+id/openWebButton"
+                    app:srcCompat="@drawable/ic_baseline_star_24" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
