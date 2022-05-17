@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
+
         <variable
             name="bookData"
             type="com.github.yeeun_yun97.clone.googlebook.data.model.BookData" />
@@ -35,13 +36,11 @@
 
         <TextView
             android:id="@+id/bookTitleTextView"
+            style="@style/important1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:text="@{bookData.title,default=제목}"
-            android:textColor="@color/black"
-            android:textSize="17sp"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@id/authorTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/bookImageView"

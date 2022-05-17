@@ -17,7 +17,7 @@ class ListBookFragment : BasicFragment<FragmentListBookBinding>() {
 
     override fun onCreateView() {
         val recyclerView = binding.recyclerView
-        binding.include.toolbarTitle = "책 목록 - '프로그래밍'"
+        binding.toolbar.toolbarTitle = "책 목록 - '프로그래밍'"
 
         val adapter = BookAdapter(::moveToViewBookFragment)
         recyclerView.layoutManager = LinearLayoutManager(context)
