@@ -1,13 +1,13 @@
 package com.github.yeeun_yun97.clone.googlebook.ui.fragment
 
-import android.content.Intent
-import android.net.Uri
+import android.content.Context
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.github.yeeun_yun97.clone.googlebook.R
 import com.github.yeeun_yun97.clone.googlebook.data.model.BookData
 import com.github.yeeun_yun97.clone.googlebook.databinding.FragmentListFavBinding
-import com.github.yeeun_yun97.clone.googlebook.ui.adapter.BookAdapter
+import com.github.yeeun_yun97.clone.googlebook.ui.adapter.FavoriteAdapter
+import com.github.yeeun_yun97.clone.googlebook.ui.component.SjNotification
 import com.github.yeeun_yun97.clone.googlebook.viewModel.BookViewModel
 import com.github.yeeun_yun97.clone.googlebook.viewModel.SingleBookViewModel
 
@@ -18,7 +18,7 @@ class ListFavFragment : BasicFragment<FragmentListFavBinding>() {
     override fun layoutId(): Int = R.layout.fragment_list_fav
 
     override fun onCreateView() {
-        val adapter = BookAdapter(::open, ::saveFav, ::moveToViewBookFragment)
+        val adapter = FavoriteAdapter(::open, ::saveFav, ::moveToViewBookFragment)
 
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
@@ -32,8 +32,6 @@ class ListFavFragment : BasicFragment<FragmentListFavBinding>() {
 
     private fun open(url: String) {
         if (url.isNotEmpty()) {
-//            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
-//            startActivity(intent)
             moveToOtherFragment(ViewWebFragment.newInstance(url))
         }
     }
@@ -45,5 +43,17 @@ class ListFavFragment : BasicFragment<FragmentListFavBinding>() {
 
     private fun saveFav(fav: BookData, isAdd: Boolean) {
         viewModel.saveFav(fav, isAdd)
+        notifyNotification(fav.title,isAdd)
     }
+
+    private fun notifyNotification(title: String, isAdd: Boolean) {
+        val textData: Pair<String, String> = if (isAdd) {
+            Pair("즐겨찾기 추가", "즐겨찾기에 ${title}(이)가 추가되었습니다.")
+        } else {
+            Pair("즐겨찾기 제거", "즐겨찾기에서 ${title}(을)를 제거하였습니다.")
+        }
+        SjNotification.notifyNotification(requireContext(), textData.first, textData.second)
+    }
+
+
 }

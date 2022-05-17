@@ -13,16 +13,14 @@ class SingleBookViewModel : ViewModel() {
     private val roomRepository = RoomRepository()
     val book = MutableLiveData<BookData>()
 
-    fun saveFav(){
-        val bookData =book.value!!
+    fun saveFav(bookData: BookData) {
         viewModelScope.launch(Dispatchers.IO) {
-            if(bookData.saved){
+            if (bookData.saved) {
                 roomRepository.deleteFav(bookData)
-            }else{
-                roomRepository.insertFav(bookData)
+            } else {
+                roomRepository.insertFav(bookData.copy(id=0))
             }
+            book.postValue(bookData.copy(saved = !bookData.saved))
         }
-        book.postValue(bookData.copy(saved=!bookData.saved))
-        Log.d("updated book Data fav", bookData.saved.toString())
     }
 }

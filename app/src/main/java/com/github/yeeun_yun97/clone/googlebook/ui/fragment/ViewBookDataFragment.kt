@@ -5,6 +5,7 @@ import com.bumptech.glide.Glide
 import com.github.yeeun_yun97.clone.googlebook.R
 import com.github.yeeun_yun97.clone.googlebook.data.model.BookData
 import com.github.yeeun_yun97.clone.googlebook.databinding.FragmentViewBookDataBinding
+import com.github.yeeun_yun97.clone.googlebook.ui.component.SjNotification
 import com.github.yeeun_yun97.clone.googlebook.viewModel.SingleBookViewModel
 
 class ViewBookDataFragment : BasicFragment<FragmentViewBookDataBinding>() {
@@ -17,7 +18,7 @@ class ViewBookDataFragment : BasicFragment<FragmentViewBookDataBinding>() {
         viewModel.book.observe(viewLifecycleOwner,
             { book ->
                 binding.favoriteImageView.setOnClickListener {
-                    setFavorite(book.saved)
+                    setFavorite(book)
                 }
                 binding.openWebButton.setOnClickListener {
                     open(book.linkUrl)
@@ -42,9 +43,19 @@ class ViewBookDataFragment : BasicFragment<FragmentViewBookDataBinding>() {
         }
     }
 
-    private fun setFavorite(isSaved: Boolean) {
-        viewModel.saveFav()
-        setFavoriteImageViewImage(isSaved)
+    private fun setFavorite(fav: BookData) {
+        viewModel.saveFav(fav)
+        setFavoriteImageViewImage(fav.saved)
+        notifyNotification(title = fav.title, isAdd = !fav.saved)
+    }
+
+    private fun notifyNotification(title: String, isAdd: Boolean) {
+        val textData: Pair<String, String> = if (isAdd) {
+            Pair("즐겨찾기 추가", "즐겨찾기에 ${title}(이)가 추가되었습니다.")
+        } else {
+            Pair("즐겨찾기 제거", "즐겨찾기에서 ${title}(을)를 제거하였습니다.")
+        }
+        SjNotification.notifyNotification(requireContext(), textData.first, textData.second)
     }
 
     private fun open(url: String) {
