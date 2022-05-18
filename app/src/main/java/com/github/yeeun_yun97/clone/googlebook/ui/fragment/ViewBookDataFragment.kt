@@ -1,10 +1,10 @@
 package com.github.yeeun_yun97.clone.googlebook.ui.fragment
 
 import androidx.fragment.app.activityViewModels
-import com.bumptech.glide.Glide
 import com.github.yeeun_yun97.clone.googlebook.R
 import com.github.yeeun_yun97.clone.googlebook.data.model.BookData
 import com.github.yeeun_yun97.clone.googlebook.databinding.FragmentViewBookDataBinding
+import com.github.yeeun_yun97.clone.googlebook.ui.component.SjImageViewUtil
 import com.github.yeeun_yun97.clone.googlebook.ui.component.SjNotification
 import com.github.yeeun_yun97.clone.googlebook.viewModel.SingleBookViewModel
 
@@ -23,7 +23,11 @@ class ViewBookDataFragment : BasicFragment<FragmentViewBookDataBinding>() {
                 binding.openWebButton.setOnClickListener {
                     open(book.linkUrl)
                 }
-                Glide.with(requireContext()).load(book.imageUrl).into(binding.imageView)
+                SjImageViewUtil.setImageResource(
+                    binding.imageView,
+                    book.imageUrl,
+                    R.drawable.ic_baseline_menu_book_24
+                )
                 if (book.saved) {
                     binding.favoriteImageView.setImageResource(R.drawable.ic_baseline_star_24)
                 } else {
