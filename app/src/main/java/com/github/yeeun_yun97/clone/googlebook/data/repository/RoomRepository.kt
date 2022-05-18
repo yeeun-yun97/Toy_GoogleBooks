@@ -20,7 +20,8 @@ class RoomRepository {
     }
 
     fun deleteFav(fav: BookData) {
-        dao.deleteFav(fav)
+        dao.deleteFavByCode(fav.code)
+//        dao.deleteFav(fav)
     }
 
     fun insertFav(fav: BookData) {

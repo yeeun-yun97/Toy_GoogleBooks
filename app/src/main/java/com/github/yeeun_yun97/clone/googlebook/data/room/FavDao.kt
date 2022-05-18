@@ -22,10 +22,14 @@ interface FavDao {
     @Delete
     fun deleteFav(fav: BookData)
 
+    @Query("DELETE FROM BookData WHERE code=:code")
+    fun deleteFavByCode(code: String)
+
     @Insert
     fun insertFav(fav: BookData)
 
     @Query("SELECT * FROM BookData WHERE code = :code")
     fun readFavByCode(code: String): BookData?
+
 
 }

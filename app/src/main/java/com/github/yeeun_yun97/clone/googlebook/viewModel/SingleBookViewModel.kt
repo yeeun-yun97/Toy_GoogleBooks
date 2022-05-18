@@ -1,6 +1,5 @@
 package com.github.yeeun_yun97.clone.googlebook.viewModel
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
